@@ -3,6 +3,7 @@
 ## Build status
 
 Stabil ag: [![Build Status](https://travis-ci.org/drupalhu/drupal.hu.svg?branch=stable-acquia)](https://travis-ci.org/drupalhu/drupal.hu)
+Fejlesztoi ag: [![Build Status](https://travis-ci.org/drupalhu/drupal.hu.svg?branch=dev)](https://travis-ci.org/drupalhu/drupal.hu)
 
 
 ## Hogyan fejlesszek a drupal.hu kodjan?
@@ -56,15 +57,15 @@ Stabil ag: [![Build Status](https://travis-ci.org/drupalhu/drupal.hu.svg?branch=
 10. Frissitsed a helyi stabil kodot.
 
 	```
-	$ git checkout stable-acquia
-	$ git pull upstream stable-acquia
+	$ git checkout dev
+	$ git pull upstream dev
 	```
 
-11. Rebase-ld a te branchedben levo valtoztatasokat az upstream acquia-stable aganak tetejere
+11. Rebase-ld a te branchedben levo valtoztatasokat az upstream dev aganak tetejere
 
 	```
 	$ git checkout nagyonmeno-feature
-	$ git rebase stable-acquia
+	$ git rebase dev
 	```
 
 12. Rebase kozben conflictok konnyen bekovetkezhetnek. Ezek feloldasa utan ``git add .`` frissiti az indexet, es folytatni lehet a rebase-t:
@@ -80,6 +81,48 @@ Stabil ag: [![Build Status](https://travis-ci.org/drupalhu/drupal.hu.svg?branch=
     ```
 
 14. Keszits egy Pull Requestet a hivatalos repo oldalan a forkodban talalhato uj branchedre, hogy a karbantartok beolvaszthassak a kodot.
+
+### Smink fejlesztése  
+
+Jelenleg használt *demon* smink fejlesztéséhez használd a [bundler](http://bundler.io/) eszközt, ami telepíti a sminkhez szükséges gemeket a gépedre pár parancs kiadása után:
+
+1. Menj a smink mappájába
+
+		
+		cd drupal.hu/docroot/sites/all/themes/demon
+		
+	
+2. Installáld a bundlert
+	
+		
+		gem install bundler
+		
+	
+3. Futtasd az install parancsot ami telepíti a szükséges komponenseket
+
+		
+		bundle install --deployment
+		
+	
+	3.1 Kimenetben ezt kellene látnod:
+	
+		
+		Fetching gem metadata from https://rubygems.org/
+		Installing chunky_png 1.3.1 (was 1.3.0)
+		Installing multi_json 1.9.2
+		Using sass 3.4.9
+		Using compass-core 1.0.1
+		Using compass 1.0.0
+		Using bundler 1.7.9
+		Your bundle is complete!
+		It was installed into ./vendor/bundle
+		
+	  
+4. Az install után az scss fájlokban történt módosítás után, már csak futtatni kell azt a parancsot ami elkészíti neked a css fájlt(vagy fájlokat)
+	
+		
+		bundle exec compass compile
+		
 
 ### Tovabbi kontribociok menete
 
